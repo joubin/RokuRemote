@@ -1,0 +1,6 @@
+framework module SwiftColors {
+  umbrella header "SwiftColors-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_RokuRemoteTests {
+  umbrella header "Pods-RokuRemoteTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
