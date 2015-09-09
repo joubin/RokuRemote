@@ -23,7 +23,11 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
     @IBOutlet weak var label: NSTextField!
     @IBOutlet weak var back: NSButton!
     @IBOutlet weak var enter: NSButton!
-    
+    @IBOutlet weak var window: NSWindow!
+
+    static var rokuList = [String]()
+    static let sharedInstance = ViewController()
+
     var ssdpSocket:GCDAsyncUdpSocket!
     var ssdpAddres          = "239.255.255.250"
     var ssdpPort:UInt16     = 1900
@@ -32,14 +36,20 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConnection()
-        // Do any additional setup after loading the view.
+
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "getRokuList:",
+            name: "getRokuList",
+            object: nil)
     }
     
     override func viewWillAppear() {
-        
         super.viewWillAppear()
         setViewToTheme()
 
+        window = self.view.window
         self.view.window?.title = "Lola"
         self.view.window?.backgroundColor = NSColor.blackColor()
         preferredContentSize = self.view.fittingSize
@@ -50,39 +60,20 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
         self.view.window!.maxSize = self.view.frame.size
         self.view.window!.minSize = self.view.frame.size
         self.nextResponder = super.nextResponder  //insert self into the Responder chain
-
         
         var gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
         let top: NSColor = NSColor(hexString: "#FF5E3A")!
         let bottom: NSColor = NSColor(hexString: "#FF2A68")!
-
         gradient.colors = [top.CGColor, bottom.CGColor]
         self.view.layer?.insertSublayer(gradient as CALayer, atIndex: 0)
-        
-//        enter.attributedTitle = NSAttributedString(string: "OK", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle ])
-
     }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-    
-    
     func setViewToTheme(){
         let pstyle = NSMutableParagraphStyle()
         pstyle.alignment = .CenterTextAlignment
         
-        
-
-        
         enter.attributedTitle = NSAttributedString(string: "OK", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle, NSFontAttributeName : NSFont.systemFontOfSize(30.0)])
-
-
-     
-
     }
     
     func setupConnection(){
@@ -91,14 +82,12 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
     
         ssdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
         ssdpSocket.sendData(data, toHost: ssdpAddres, port: ssdpPort, withTimeout: 1, tag: 0)
-    
-        //bind for responses
+        
         ssdpSocket.bindToPort(ssdpPort, error: nil)
         ssdpSocket.joinMulticastGroup(ssdpAddres, error: nil)
         ssdpSocket.beginReceiving(nil)
     }
     
-
     @IBAction func buttonPressed(sender: AnyObject) {
         var url:NSURL
         if sender as! NSObject == play{
@@ -125,12 +114,10 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
             return
         }
         
-        println(url)
         var request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
 
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler:nil).resume()
-        
     }
 
     func udpSocket(sock: GCDAsyncUdpSocket!, didConnectToAddress address: NSData!) {
@@ -154,33 +141,27 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
         return NSURL(string:  str)!
     }
     
-    
     func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
-        
         var host: NSString?
         var port1: UInt16 = 0
         GCDAsyncUdpSocket.getHost(&host, port: &port1, fromAddress: address)
-
+        
         let gotdata: NSString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        
         if(gotdata.containsString("Roku")){
             var lines = (gotdata as! String).componentsSeparatedByString("\n")
             for i in lines{
                 if i.rangeOfString("LOCATION") != nil{
-                    label.stringValue =  i.componentsSeparatedByString("LOCATION:")[1].lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    label.alignment = NSTextAlignment.CenterTextAlignment
+                    var str:String =  i.componentsSeparatedByString("LOCATION:")[1].lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    ViewController.rokuList.append( str)
+                    if(label.stringValue == ""){
+                        label.stringValue = str
+                        label.alignment = NSTextAlignment.CenterTextAlignment
+                    }
                     
                 }
             }
            
-        }
-    }
-    
-    
-    override func keyDown(theEvent: NSEvent) {
-        if theEvent.keyCode == 124 {
-            println("abc")
-        } else {
-            println("abcd")
         }
     }
     
@@ -196,6 +177,24 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate {
         return true
     }
     
+    @IBAction func showRokus(sender: AnyObject) {
+        println("showing")
+    }
+    
+    func resize() {
+        var windowFrame = self.view.window?.frame
+        let oldWidth = windowFrame!.size.width
+        let oldHeight = windowFrame!.size.height
+        let toAdd = CGFloat(130)
+        let newHeight = oldHeight + toAdd
+        windowFrame!.size = NSMakeSize(oldWidth, newHeight)
+            window.setFrame(windowFrame!, display: true)
+    }
+    
+
+    func getRokuList() -> [String]{
+        return ViewController.rokuList
+    }
     
 }
 

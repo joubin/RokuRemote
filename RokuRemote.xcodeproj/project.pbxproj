@@ -14,6 +14,7 @@
 		821C58551B97F5C9003BFDDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821C58541B97F5C9003BFDDA /* Images.xcassets */; };
 		821C58581B97F5C9003BFDDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821C58561B97F5C9003BFDDA /* Main.storyboard */; };
 		821C58641B97F5C9003BFDDA /* RokuRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C58631B97F5C9003BFDDA /* RokuRemoteTests.swift */; };
+		8287561B1B9E80D200A9CC14 /* RokuSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8287561A1B9E80D200A9CC14 /* RokuSelector.swift */; };
 		B49E49E8DCDE653D082605F4 /* Pods_RokuRemoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA3A6793CF5544CD716C427 /* Pods_RokuRemoteTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E147782BC688053E0B2741CD /* Pods_RokuRemote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		821C585D1B97F5C9003BFDDA /* RokuRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RokuRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		821C58621B97F5C9003BFDDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821C58631B97F5C9003BFDDA /* RokuRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RokuRemoteTests.swift; sourceTree = "<group>"; };
+		8287561A1B9E80D200A9CC14 /* RokuSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RokuSelector.swift; sourceTree = "<group>"; };
 		BAA3A6793CF5544CD716C427 /* Pods_RokuRemoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RokuRemoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RokuRemote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 				821C58541B97F5C9003BFDDA /* Images.xcassets */,
 				821C58561B97F5C9003BFDDA /* Main.storyboard */,
 				821C584E1B97F5C9003BFDDA /* Supporting Files */,
+				8287561A1B9E80D200A9CC14 /* RokuSelector.swift */,
 			);
 			path = RokuRemote;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				821C58531B97F5C9003BFDDA /* ViewController.swift in Sources */,
+				8287561B1B9E80D200A9CC14 /* RokuSelector.swift in Sources */,
 				821C58511B97F5C9003BFDDA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
