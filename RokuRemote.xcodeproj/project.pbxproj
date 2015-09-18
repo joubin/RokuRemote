@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		821B33B11B97F9EF00F9A0A7 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821B33B01B97F9EF00F9A0A7 /* CocoaAsyncSocket.framework */; };
-		821B33B31B99732700F9A0A7 /* SwiftColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821B33B21B99732700F9A0A7 /* SwiftColors.framework */; };
 		821C58511B97F5C9003BFDDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C58501B97F5C9003BFDDA /* AppDelegate.swift */; };
 		821C58531B97F5C9003BFDDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C58521B97F5C9003BFDDA /* ViewController.swift */; };
 		821C58551B97F5C9003BFDDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821C58541B97F5C9003BFDDA /* Images.xcassets */; };
 		821C58581B97F5C9003BFDDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821C58561B97F5C9003BFDDA /* Main.storyboard */; };
 		821C58641B97F5C9003BFDDA /* RokuRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C58631B97F5C9003BFDDA /* RokuRemoteTests.swift */; };
-		8287561B1B9E80D200A9CC14 /* RokuSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8287561A1B9E80D200A9CC14 /* RokuSelector.swift */; };
+		8298C0831BAA8AA500D56BFA /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826876AA1B9FF45C00EBBB74 /* CocoaAsyncSocket.framework */; };
+		8298C0841BAA8AA500D56BFA /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 826876AA1B9FF45C00EBBB74 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8298C0861BAA8AB800D56BFA /* SwiftColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821B33B21B99732700F9A0A7 /* SwiftColors.framework */; };
+		8298C0871BAA8AB800D56BFA /* SwiftColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 821B33B21B99732700F9A0A7 /* SwiftColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8298C0881BAA8AC500D56BFA /* Pods_RokuRemote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */; };
+		8298C0891BAA8AC500D56BFA /* Pods_RokuRemote.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B49E49E8DCDE653D082605F4 /* Pods_RokuRemoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA3A6793CF5544CD716C427 /* Pods_RokuRemoteTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E147782BC688053E0B2741CD /* Pods_RokuRemote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,22 @@
 			remoteInfo = RokuRemote;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8298C0851BAA8AA500D56BFA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8298C0871BAA8AB800D56BFA /* SwiftColors.framework in Embed Frameworks */,
+				8298C0891BAA8AC500D56BFA /* Pods_RokuRemote.framework in Embed Frameworks */,
+				8298C0841BAA8AA500D56BFA /* CocoaAsyncSocket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		199B1B93F7BD8FC8993264CE /* Pods-RokuRemote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RokuRemote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RokuRemote/Pods-RokuRemote.debug.xcconfig"; sourceTree = "<group>"; };
@@ -45,7 +63,7 @@
 		821C585D1B97F5C9003BFDDA /* RokuRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RokuRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		821C58621B97F5C9003BFDDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821C58631B97F5C9003BFDDA /* RokuRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RokuRemoteTests.swift; sourceTree = "<group>"; };
-		8287561A1B9E80D200A9CC14 /* RokuSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RokuSelector.swift; sourceTree = "<group>"; };
+		826876AA1B9FF45C00EBBB74 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/RokuRemote-etmkazsuvfrjhfgaftdlryqyjmqk/Build/Products/Debug/CocoaAsyncSocket.framework"; sourceTree = "<group>"; };
 		BAA3A6793CF5544CD716C427 /* Pods_RokuRemoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RokuRemoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RokuRemote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -55,9 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				821B33B31B99732700F9A0A7 /* SwiftColors.framework in Frameworks */,
-				821B33B11B97F9EF00F9A0A7 /* CocoaAsyncSocket.framework in Frameworks */,
-				E147782BC688053E0B2741CD /* Pods_RokuRemote.framework in Frameworks */,
+				8298C0861BAA8AB800D56BFA /* SwiftColors.framework in Frameworks */,
+				8298C0831BAA8AA500D56BFA /* CocoaAsyncSocket.framework in Frameworks */,
+				8298C0881BAA8AC500D56BFA /* Pods_RokuRemote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +93,7 @@
 		58E7C2BD5BD5945240E283F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				826876AA1B9FF45C00EBBB74 /* CocoaAsyncSocket.framework */,
 				821B33B21B99732700F9A0A7 /* SwiftColors.framework */,
 				821B33B01B97F9EF00F9A0A7 /* CocoaAsyncSocket.framework */,
 				CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */,
@@ -122,7 +141,6 @@
 				821C58541B97F5C9003BFDDA /* Images.xcassets */,
 				821C58561B97F5C9003BFDDA /* Main.storyboard */,
 				821C584E1B97F5C9003BFDDA /* Supporting Files */,
-				8287561A1B9E80D200A9CC14 /* RokuSelector.swift */,
 			);
 			path = RokuRemote;
 			sourceTree = "<group>";
@@ -165,6 +183,7 @@
 				821C58491B97F5C9003BFDDA /* Resources */,
 				AD1D3707FC5B05581E340A38 /* Embed Pods Frameworks */,
 				15920C9F59FDA0908581E339 /* Copy Pods Resources */,
+				8298C0851BAA8AA500D56BFA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -202,7 +221,9 @@
 		821C58431B97F5C9003BFDDA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Joubin Jabbari";
 				TargetAttributes = {
 					821C584A1B97F5C9003BFDDA = {
@@ -351,7 +372,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				821C58531B97F5C9003BFDDA /* ViewController.swift in Sources */,
-				8287561B1B9E80D200A9CC14 /* RokuSelector.swift in Sources */,
 				821C58511B97F5C9003BFDDA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -403,10 +424,13 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -422,9 +446,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				REEXPORTED_FRAMEWORK_NAMES = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -434,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -447,9 +473,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -460,8 +488,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				REEXPORTED_FRAMEWORK_NAMES = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -479,6 +509,7 @@
 				);
 				INFOPLIST_FILE = RokuRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.jabbari.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -496,6 +527,7 @@
 				);
 				INFOPLIST_FILE = RokuRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.jabbari.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -516,6 +548,7 @@
 				);
 				INFOPLIST_FILE = RokuRemoteTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.jabbari.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RokuRemote.app/Contents/MacOS/RokuRemote";
 			};
@@ -533,6 +566,7 @@
 				);
 				INFOPLIST_FILE = RokuRemoteTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.jabbari.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RokuRemote.app/Contents/MacOS/RokuRemote";
 			};

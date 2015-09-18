@@ -812,15 +812,14 @@ DQ
                                     <action selector="buttonPressed:" target="XfG-lQ-9wD" id="S07-rY-Twc"/>
                                 </connections>
                             </button>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXc-vt-aKM">
-                                <rect key="frame" x="9" y="13" width="13" height="13"/>
-                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qM0-UT-6HD">
-                                    <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39G-vh-A2s">
+                                <rect key="frame" x="412" y="208" width="48" height="48"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="keyboard" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Y3X-lm-gdC">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="showRokus:" target="XfG-lQ-9wD" id="qqj-7I-Dq8"/>
-                                    <segue destination="3JY-zX-vik" kind="popover" popoverAnchorView="TXc-vt-aKM" popoverBehavior="t" preferredEdge="maxY" id="UYV-cl-zlD"/>
+                                    <action selector="keyBoardPressed:" target="XfG-lQ-9wD" id="8Pe-Jf-PPM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -851,6 +850,7 @@ DQ
                         <outlet property="enter" destination="UlK-xB-tVy" id="xNm-kE-XNW"/>
                         <outlet property="forward" destination="GAf-as-fDH" id="lRd-D5-s7p"/>
                         <outlet property="home" destination="EMP-b3-zof" id="WSB-cQ-Ov8"/>
+                        <outlet property="keyboard" destination="39G-vh-A2s" id="fSU-5b-6Xh"/>
                         <outlet property="label" destination="vZb-wn-DwG" id="XxE-iH-4ra"/>
                         <outlet property="left" destination="RaB-Q0-nR4" id="oEX-Qv-2od"/>
                         <outlet property="play" destination="ski-C2-B49" id="lal-Yv-pdM"/>
@@ -863,52 +863,13 @@ DQ
             </objects>
             <point key="canvasLocation" x="462" y="642"/>
         </scene>
-        <!--Roku Selector-->
-        <scene sceneID="McX-Tk-6qw">
-            <objects>
-                <viewController id="3JY-zX-vik" customClass="RokuSelector" customModule="RokuRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Pqu-Ak-ngE">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="137"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdy-Uk-Ke3">
-                                <rect key="frame" x="20" y="79" width="61" height="38"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                <size key="cellSize" width="58" height="18"/>
-                                <size key="intercellSpacing" width="4" height="2"/>
-                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="UjI-Rl-X2Q">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <cells>
-                                    <column>
-                                        <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="kgK-W4-V2N">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="LMw-Ox-L3Q">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </column>
-                                </cells>
-                            </matrix>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="buttonGroup" destination="hdy-Uk-Ke3" id="jHS-br-kgt"/>
-                    </connections>
-                </viewController>
-                <customObject id="eZo-GB-a2g" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="462" y="995.5"/>
-        </scene>
     </scenes>
     <resources>
         <image name="back" width="48" height="48"/>
         <image name="down" width="48" height="48"/>
         <image name="fastforward" width="48" height="48"/>
         <image name="home" width="48" height="48"/>
+        <image name="keyboard" width="48" height="48"/>
         <image name="left" width="48" height="48"/>
         <image name="play" width="48" height="48"/>
         <image name="rewind" width="48" height="48"/>
