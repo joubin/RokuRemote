@@ -504,7 +504,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/RokuRemote-etmkazsuvfrjhfgaftdlryqyjmqk/Build/Products/Debug",
 				);
 				INFOPLIST_FILE = RokuRemote/Info.plist;
@@ -522,7 +521,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/RokuRemote-etmkazsuvfrjhfgaftdlryqyjmqk/Build/Products/Debug",
 				);
 				INFOPLIST_FILE = RokuRemote/Info.plist;
