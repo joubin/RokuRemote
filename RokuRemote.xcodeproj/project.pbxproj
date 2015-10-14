@@ -18,7 +18,7 @@
 		8298C0871BAA8AB800D56BFA /* SwiftColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 821B33B21B99732700F9A0A7 /* SwiftColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8298C0881BAA8AC500D56BFA /* Pods_RokuRemote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */; };
 		8298C0891BAA8AC500D56BFA /* Pods_RokuRemote.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC5234F49794A20E4402F6A9 /* Pods_RokuRemote.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B49E49E8DCDE653D082605F4 /* Pods_RokuRemoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA3A6793CF5544CD716C427 /* Pods_RokuRemoteTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B49E49E8DCDE653D082605F4 /* Pods_RokuRemoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA3A6793CF5544CD716C427 /* Pods_RokuRemoteTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
