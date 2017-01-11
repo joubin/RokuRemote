@@ -288,9 +288,10 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
                 ViewController.rokuListRoku.updateValue(str, forKey: keyVal)
              yPosition = yPosition - 22
             }
+        ssdpSocket.close()
+
         stopRotatingView()
 
-        ssdpSocket.close()
     }
     
     override func mouseDown(theEvent: NSEvent) {

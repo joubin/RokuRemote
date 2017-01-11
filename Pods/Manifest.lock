@@ -1,6 +1,6 @@
 PODS:
   - CocoaAsyncSocket (7.4.2)
-  - SwiftColors (0.2.1)
+  - SwiftColors (0.3.1)
 
 DEPENDENCIES:
   - CocoaAsyncSocket
@@ -8,6 +8,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
-  SwiftColors: 42829cb8e63077f45c8c2672377095b964148646
+  SwiftColors: 61efe0bf991cfed446684e03d1e9f635f1f11a84
 
 COCOAPODS: 0.39.0
