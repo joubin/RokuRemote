@@ -12,13 +12,13 @@
 		821C58551B97F5C9003BFDDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821C58541B97F5C9003BFDDA /* Images.xcassets */; };
 		821C58581B97F5C9003BFDDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821C58561B97F5C9003BFDDA /* Main.storyboard */; };
 		821C58641B97F5C9003BFDDA /* RokuRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C58631B97F5C9003BFDDA /* RokuRemoteTests.swift */; };
-		82C9BFC61BCDEFBE005D4EA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9BF981BCDEFBE005D4EA4 /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		82C9BFC71BCDEFBE005D4EA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BF991BCDEFBE005D4EA4 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
-		82C9BFC81BCDEFBE005D4EA4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BF9B1BCDEFBE005D4EA4 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
-		82C9BFC91BCDEFBE005D4EA4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BF9C1BCDEFBE005D4EA4 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		82C9BFCA1BCDEFBE005D4EA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9BF9D1BCDEFBE005D4EA4 /* ViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		82C9BFCC1BCDEFBE005D4EA4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BFA31BCDEFBE005D4EA4 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		82C9BFCD1BCDEFBE005D4EA4 /* RokuRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9BFA41BCDEFBE005D4EA4 /* RokuRemoteTests.swift */; settings = {ASSET_TAGS = (); }; };
+		82C9BFC61BCDEFBE005D4EA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9BF981BCDEFBE005D4EA4 /* AppDelegate.swift */; };
+		82C9BFC71BCDEFBE005D4EA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BF991BCDEFBE005D4EA4 /* Main.storyboard */; };
+		82C9BFC81BCDEFBE005D4EA4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BF9B1BCDEFBE005D4EA4 /* Images.xcassets */; };
+		82C9BFC91BCDEFBE005D4EA4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BF9C1BCDEFBE005D4EA4 /* Info.plist */; };
+		82C9BFCA1BCDEFBE005D4EA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9BF9D1BCDEFBE005D4EA4 /* ViewController.swift */; };
+		82C9BFCC1BCDEFBE005D4EA4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82C9BFA31BCDEFBE005D4EA4 /* Info.plist */; };
+		82C9BFCD1BCDEFBE005D4EA4 /* RokuRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9BFA41BCDEFBE005D4EA4 /* RokuRemoteTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -514,6 +514,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.jabbari.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -530,6 +531,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.jabbari.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
