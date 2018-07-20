@@ -14,39 +14,8 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-RokuRemoteTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftColors.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>BAA644A4C9255592055F3C48844607ED</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E59340ABBB5D2CD903E460877DB3112F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F1B3E529BBA3A1BF34DDE3701004D33D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F7D0798FD84A68D558F84856F53EF0A6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

@@ -9,20 +9,12 @@
 import CocoaAsyncSocket
 import Cocoa
 import Foundation
-import SwiftColors
-
-protocol CustomViewDelegate {
-    func performKeyEquivalent(theEvent: NSEvent) -> Bool
-    func keyDown(aEvent: NSEvent)
-    func keyUp(aEvent: NSEvent)
-    
-}
 
 
 
     
 
-class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDelegate  {
+class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  {
 
     var yPosition:Int = 215
     var xPosition:Int = 220
@@ -55,55 +47,72 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSEvent.addLocalMonitorForEventsMatchingMask(.KeyDownMask) { (aEvent) -> NSEvent? in
-            self.keyDown(aEvent)
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
+            self.keyDown(with: aEvent)
+            return aEvent
+        }
+       
+        
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
+            self.keyUp(with: aEvent)
             return aEvent
         }
         
-        NSEvent.addLocalMonitorForEventsMatchingMask(.KeyUpMask) { (aEvent) -> NSEvent? in
-            self.keyUp(aEvent)
-            return aEvent
-        }
-        
-        NSEvent.addLocalMonitorForEventsMatchingMask(.PeriodicMask){ (aEvent) -> NSEvent? in
-            self.performKeyEquivalent(aEvent)
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
+            self.performKeyEquivalent(with: aEvent)
             return aEvent
         }
         setupConnection()
-        
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "getRokuList:",
-            name: "getRokuList",
+            selector: Selector("getRokuList:"),
+            name: NSNotification.Name(rawValue: "getRokuList"),
             object: nil)
     }
     
- 
-    override var representedObject: AnyObject? {
+   
+    override var representedObject: Any? {
         didSet {
         }
     }
     
-    override func performKeyEquivalent(theEvent: NSEvent) -> Bool {
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
         return true
     }
     
-    override func keyUp(theEvent: NSEvent) {
-        print("key up")
-    }
+  
     
-    override func keyDown(theEvent:NSEvent) {
-        print(theEvent)
-        if !self.isHighLighted{
-            return
-        }
-        let str = theEvent.characters!
-        let decodedString = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-    
-        setRequest(getKeyboardTypeing(decodedString!))
+    override func keyDown(with theEvent: NSEvent) {
+                print(theEvent)
+                if !self.isHighLighted{
+                    return
+                }
+                let str = theEvent.characters!
+                let nsstr = str as NSString
+        let decodedString = nsstr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.URLHostAllowedCharacterSet)
+        
+            str.stringbyadd
+        
+                setRequest(getKeyboardTypeing(decodedString!))
 
     }
-    
+//
+//    override func keyUp(theEvent: NSEvent) {
+//        print("key up")
+//    }
+//
+//    override func keyDown(theEvent:NSEvent) {
+//        print(theEvent)
+//        if !self.isHighLighted{
+//            return
+//        }
+//        let str = theEvent.characters!
+//        let decodedString = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+//
+//        setRequest(getKeyboardTypeing(decodedString!))
+//
+//    }
+//
     override func becomeFirstResponder() -> Bool {
         return true;
     }
@@ -121,16 +130,16 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
         setViewToTheme()
         self.becomeFirstResponder()
 
-        self.view.window?.titleVisibility = NSWindowTitleVisibility.Hidden
-        self.view.window?.standardWindowButton(NSWindowButton.MiniaturizeButton)?.hidden = true
-        self.view.window?.standardWindowButton(NSWindowButton.ZoomButton)?.hidden = true
+        self.view.window?.titleVisibility = NSWindow.TitleVisibility.Hidden
+        self.view.window?.standardWindowButton(NSWindow.ButtonType.MiniaturizeButton)?.hidden = true
+        self.view.window?.standardWindowButton(NSWindow.ButtonType.ZoomButton)?.hidden = true
         self.view.window?.title = "Lola"
-        self.view.window?.backgroundColor = NSColor.blackColor()
+        self.view.window?.backgroundColor = NSColor.blackColor
         preferredContentSize = self.view.fittingSize
-        self.view.window!.titleVisibility = NSWindowTitleVisibility.Hidden;
+        self.view.window!.titleVisibility = NSWindow.TitleVisibility.Hidden;
         self.view.window!.titlebarAppearsTransparent = true
-        self.view.window!.styleMask |= NSFullSizeContentViewWindowMask
-        self.view.window!.movableByWindowBackground  = true
+        self.view.window!.styleMask |= UInt8(NSFullSizeContentViewWindowMask.rawValue)
+        self.view.window!.isMovableByWindowBackground  = true
         self.view.window!.maxSize = self.view.frame.size
         self.view.window!.minSize = self.view.frame.size
 //        self.nextResponder = super.nextResponder  //insert self into the Responder chain
@@ -139,10 +148,10 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
         gradient.frame = self.view.bounds
         let top: NSColor = NSColor(hexString: "#C644FC")!
         let bottom: NSColor = NSColor(hexString: "#5856D6")!
-        gradient.colors = [top.CGColor, bottom.CGColor]
-        self.view.layer?.insertSublayer(gradient as CALayer, atIndex: 0)
+        gradient.colors = [top.cgColor, bottom.CGColor]
+        self.view.layer?.insertSublayer(gradient as CALayer, at: 0)
         
-        self.label.textColor = NSColor.whiteColor()
+        self.label.textColor = NSColor.whiteColor
         
     }
 
@@ -155,11 +164,11 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
     
     func setupConnection(){
 
-        let data = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: roku:ecp\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)
+        let data = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: roku:ecp\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n".data(usingEncoding: String.Encoding.utf8)
         ssdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
-        ssdpSocket.sendData(data, toHost: ssdpAddres, port: ssdpPort, withTimeout: 1, tag: 0)
+        ssdpSocket.sendData(data!, toHost: ssdpAddres, port: ssdpPort, withTimeout: 1, tag: 0)
         do {
-            try ssdpSocket.bindToPort(ssdpPort)
+            try ssdpSocket.bind(toPort: ssdpPort)
         } catch _ {
         }
         do {
@@ -177,36 +186,36 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
         if self.isHighLighted{
             return
         }else if sender as! NSObject == play{
-            url = getButten("Play")
+            url = getButten(action: "Play")
         }else if sender as! NSObject == rewind{
-            url = getButten("Rev")
+            url = getButten(action: "Rev")
         }else if sender as! NSObject == forward{
-            url = getButten("Fwd")
+            url = getButten(action: "Fwd")
         }else if sender as! NSObject == home{
-            url = getButten("Home")
+            url = getButten(action: "Home")
         }else if sender as! NSObject == down{
-            url = getButten("Down")
+            url = getButten(action: "Down")
         }else if sender as! NSObject == up{
-            url = getButten("Up")
+            url = getButten(action: "Up")
         }else if sender as! NSObject == right{
-            url = getButten("Right")
+            url = getButten(action: "Right")
         }else if sender as! NSObject == left{
-            url = getButten("Left")
+            url = getButten(action: "Left")
         }else if sender as! NSObject == back{
-            url = getButten("Back")
+            url = getButten(action: "Back")
         }else if sender as! NSObject == enter{
-            url = getButten("Select")
+            url = getButten(action: "Select")
         }else{
             return
         }
-        setRequest(url)
+        setRequest(url: url)
     }
     
     func setRequest(url:NSURL){
-        let request = NSMutableURLRequest(URL: url)
+        let request = NSMutableURLRequest(URL: url as URL)
         request.HTTPMethod = "POST"
 
-        NSURLSession.sharedSession().dataTaskWithRequest(request).resume()
+        URLSession.sharedSession().dataTaskWithRequest(request).resume()
     }
 
     func udpSocket(sock: GCDAsyncUdpSocket!, didConnectToAddress address: NSData!) {
@@ -249,11 +258,11 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
     func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
         var host: NSString?
         var port1: UInt16 = 0
-        GCDAsyncUdpSocket.getHost(&host, port: &port1, fromAddress: address)
+        GCDAsyncUdpSocket.getHost(&host, port: &port1, fromAddress: address as Data)
         
-        let gotdata: NSString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        let gotdata: NSString = NSString(data: data! as Data, encoding: NSUTF8StringEncoding)!
         
-        if(gotdata.containsString("Roku")){
+        if(gotdata.contains("Roku")){
             let lines = (gotdata as String).componentsSeparatedByString("\n")
             for i in lines{
                 if i.rangeOfString("LOCATION") != nil{
@@ -262,7 +271,7 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
                 }
             }
         }
-        let rokuImage = NSImage(named: "roku")
+        let rokuImage = NSImage(named: NSImage.Name(rawValue: "roku"))
         for tmpView in self.view.subviews{
             if tmpView.isKindOfClass(NSImageView) {
                 let rokuImageView = tmpView as! NSImageView
@@ -277,11 +286,11 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
                 image.image = rokuImage
             
                 image.toolTip = str
-                image.action = "imageClicked"
-                image.enabled = true
+                image.action = Selector("imageClicked")
+                image.isEnabled = true
                 image.acceptsTouchEvents = true
                 
-                let tapGestureRecognizer = NSGestureRecognizer(target:self, action:Selector("imageTapped:"))
+                let tapGestureRecognizer = NSGestureRecognizer(target:self, action:Selector(("imageTapped:")))
                 image.addGestureRecognizer(tapGestureRecognizer)
                 self.view.addSubview(image)
                 let keyVal:String = String(stringInterpolationSegment: image.frame.origin.x) + " " + String(stringInterpolationSegment: image.frame.origin.y)
@@ -295,7 +304,7 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
     }
     
     override func mouseDown(theEvent: NSEvent) {
-        _ = NSNumberFormatter()
+        _ = NumberFormatter()
         for (k,v) in ViewController.rokuListRoku{
             var xy = k.characters.split{$0 == " "}.map { String($0) }.map{String($0)}
             let x = xy[0]
@@ -322,7 +331,7 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
     }
     
     @IBAction func keyBoardPressed(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async {
             if self.isHighLighted == false{
                 sender.highlight(true)
                 self.isHighLighted = true
@@ -331,11 +340,11 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
                 sender.highlight(false)
                 self.isHighLighted = false
             }
-        });
+        }
     }
     
     func rotateView() {
-        if refreshButton.layer!.animationForKey("rotation") == nil {
+        if refreshButton.layer!.animation(forKey: "rotation") == nil {
             let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
             
             rotationAnimation.fromValue = 0.0
@@ -349,16 +358,16 @@ class ViewController: NSViewController, CustomViewDelegate, GCDAsyncUdpSocketDel
             let xCenter = xPoint!-(width/2)
             let yCenter = yPoint!-(height/2)
             _ = CGPointMake(xCenter, yCenter)
-            refreshButton.layer?.anchorPoint = CGPointMake(0.5, 0.5)
-            refreshButton.layer!.addAnimation(rotationAnimation, forKey: "rotation")
+            refreshButton.layer?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+            refreshButton.layer!.add(rotationAnimation, forKey: "rotation")
         }
 
     }
     
     func stopRotatingView() {
         print("finish:")
-        if refreshButton.layer!.animationForKey("rotation") != nil {
-            refreshButton.layer!.removeAnimationForKey("rotation")     }
+        if refreshButton.layer!.animation(forKey: "rotation") != nil {
+            refreshButton.layer!.removeAnimation(forKey: "rotation")     }
     }
 
 }

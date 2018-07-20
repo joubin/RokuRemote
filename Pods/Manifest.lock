@@ -1,13 +1,16 @@
 PODS:
-  - CocoaAsyncSocket (7.4.2)
-  - SwiftColors (0.3.1)
+  - CocoaAsyncSocket (7.6.3)
 
 DEPENDENCIES:
   - CocoaAsyncSocket
-  - SwiftColors
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaAsyncSocket
 
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
-  SwiftColors: 61efe0bf991cfed446684e03d1e9f635f1f11a84
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 21a17078cc42794fe9002f59abd1ba0d8a45a829
+
+COCOAPODS: 1.5.3
