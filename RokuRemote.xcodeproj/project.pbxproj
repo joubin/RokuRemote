@@ -11,7 +11,6 @@
 		821C58531B97F5C9003BFDDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C58521B97F5C9003BFDDA /* ViewController.swift */; };
 		821C58551B97F5C9003BFDDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821C58541B97F5C9003BFDDA /* Images.xcassets */; };
 		821C58581B97F5C9003BFDDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821C58561B97F5C9003BFDDA /* Main.storyboard */; };
-		822A02B321027F4300850982 /* Progress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822A02B221027F4300850982 /* Progress.framework */; };
 		822A02B521027F4700850982 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 822A02B421027F4700850982 /* CocoaAsyncSocket.framework */; };
 		867E97E24E2AD34C045A5BA5 /* Pods_RokuRemote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7171D3BD73EE06C3386E984 /* Pods_RokuRemote.framework */; };
 /* End PBXBuildFile section */
@@ -51,7 +50,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				822A02B521027F4700850982 /* CocoaAsyncSocket.framework in Frameworks */,
-				822A02B321027F4300850982 /* Progress.framework in Frameworks */,
 				867E97E24E2AD34C045A5BA5 /* Pods_RokuRemote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,10 +12,10 @@ import Foundation
 
 
 
+
+
+class ViewController: NSViewController, GCDAsyncUdpSocketDelegate  {
     
-
-class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  {
-
     var yPosition:Int = 215
     var xPosition:Int = 220
     var positionDefault:Int = 215
@@ -34,24 +34,24 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
     @IBOutlet weak var label: NSTextField!
     @IBOutlet weak var back: NSButton!
     @IBOutlet weak var enter: NSButton!
-
+    
     var isHighLighted = false
     static var rokuList = [String]()
     static var rokuListRoku = Dictionary<String, String>()
     static let sharedInstance = ViewController()
-
+    
     var ssdpSocket:GCDAsyncUdpSocket!
     var ssdpAddres          = "239.255.255.250"
     var ssdpPort:UInt16     = 1900
     var rokuIP = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
             self.keyDown(with: aEvent)
             return aEvent
         }
-       
+        
         
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
             self.keyUp(with: aEvent)
@@ -65,12 +65,12 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
         setupConnection()
         NotificationCenter.default.addObserver(
             self,
-            selector: Selector("getRokuList:"),
+            selector: Selector(("getRokuList:")),
             name: NSNotification.Name(rawValue: "getRokuList"),
             object: nil)
     }
     
-   
+    
     override var representedObject: Any? {
         didSet {
         }
@@ -80,39 +80,38 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
         return true
     }
     
-  
+    
     
     override func keyDown(with theEvent: NSEvent) {
-                print(theEvent)
-                if !self.isHighLighted{
-                    return
-                }
-                let str = theEvent.characters!
-                let nsstr = str as NSString
-        let decodedString = nsstr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.URLHostAllowedCharacterSet)
+        print(theEvent)
+        if !self.isHighLighted{
+            return
+        }
+        let str = theEvent.characters!
+        let nsstr = str as NSString
+        let decodedString = nsstr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlHostAllowed)
         
-            str.stringbyadd
         
-                setRequest(getKeyboardTypeing(decodedString!))
-
+        setRequest(url: getKeyboardTypeing(action: decodedString!))
+        
     }
-//
-//    override func keyUp(theEvent: NSEvent) {
-//        print("key up")
-//    }
-//
-//    override func keyDown(theEvent:NSEvent) {
-//        print(theEvent)
-//        if !self.isHighLighted{
-//            return
-//        }
-//        let str = theEvent.characters!
-//        let decodedString = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-//
-//        setRequest(getKeyboardTypeing(decodedString!))
-//
-//    }
-//
+    //
+    //    override func keyUp(theEvent: NSEvent) {
+    //        print("key up")
+    //    }
+    //
+    //    override func keyDown(theEvent:NSEvent) {
+    //        print(theEvent)
+    //        if !self.isHighLighted{
+    //            return
+    //        }
+    //        let str = theEvent.characters!
+    //        let decodedString = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+    //
+    //        setRequest(getKeyboardTypeing(decodedString!))
+    //
+    //    }
+    //
     override func becomeFirstResponder() -> Bool {
         return true;
     }
@@ -124,49 +123,50 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
     override func resignFirstResponder() -> Bool {
         return true
     }
-
+    
     override func viewWillAppear() {
         super.viewWillAppear()
         setViewToTheme()
         self.becomeFirstResponder()
-
-        self.view.window?.titleVisibility = NSWindow.TitleVisibility.Hidden
-        self.view.window?.standardWindowButton(NSWindow.ButtonType.MiniaturizeButton)?.hidden = true
-        self.view.window?.standardWindowButton(NSWindow.ButtonType.ZoomButton)?.hidden = true
+        
+        self.view.window?.titleVisibility = NSWindow.TitleVisibility.hidden
+        self.view.window?.standardWindowButton(NSWindow.ButtonType.miniaturizeButton)?.isHidden = true
+        self.view.window?.standardWindowButton(NSWindow.ButtonType.zoomButton)?.isHidden = true
         self.view.window?.title = "Lola"
-        self.view.window?.backgroundColor = NSColor.blackColor
+        self.view.window?.backgroundColor = NSColor.black
         preferredContentSize = self.view.fittingSize
-        self.view.window!.titleVisibility = NSWindow.TitleVisibility.Hidden;
+        self.view.window!.titleVisibility = NSWindow.TitleVisibility.hidden;
         self.view.window!.titlebarAppearsTransparent = true
-        self.view.window!.styleMask |= UInt8(NSFullSizeContentViewWindowMask.rawValue)
+        self.view.window?.styleMask.insert(.fullSizeContentView)
         self.view.window!.isMovableByWindowBackground  = true
         self.view.window!.maxSize = self.view.frame.size
         self.view.window!.minSize = self.view.frame.size
-//        self.nextResponder = super.nextResponder  //insert self into the Responder chain
+        //        self.nextResponder = super.nextResponder  //insert self into the Responder chain
         
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        let top: NSColor = NSColor(hexString: "#C644FC")!
-        let bottom: NSColor = NSColor(hexString: "#5856D6")!
-        gradient.colors = [top.cgColor, bottom.CGColor]
+        
+        let top: NSColor = NSColor(hexString: "#C644FC")
+        let bottom: NSColor = NSColor(hexString: "#5856D6")
+        gradient.colors = [top.cgColor, bottom.cgColor]
         self.view.layer?.insertSublayer(gradient as CALayer, at: 0)
         
-        self.label.textColor = NSColor.whiteColor
+        self.label.textColor = NSColor.white
         
     }
-
+    
     func setViewToTheme(){
         let pstyle = NSMutableParagraphStyle()
-//        pstyle.alignment = NSAlignmen
+        //        pstyle.alignment = NSAlignmen
         
-        enter.attributedTitle = NSAttributedString(string: "OK", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : pstyle, NSFontAttributeName : NSFont.systemFontOfSize(30.0)])
+        enter.attributedTitle = NSAttributedString(string: "OK", attributes: [ kCTForegroundColorAttributeName as NSAttributedStringKey : NSColor.white, kCTParagraphStyleAttributeName as NSAttributedStringKey : pstyle, kCTFontAttributeName as NSAttributedStringKey : NSFont.systemFont(ofSize: 30.0)])
     }
     
     func setupConnection(){
-
-        let data = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: roku:ecp\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n".data(usingEncoding: String.Encoding.utf8)
-        ssdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
-        ssdpSocket.sendData(data!, toHost: ssdpAddres, port: ssdpPort, withTimeout: 1, tag: 0)
+        
+        let data = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: roku:ecp\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n".data(using: String.Encoding.utf8)
+        ssdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
+        ssdpSocket.send(data!, toHost: ssdpAddres, port: ssdpPort, withTimeout: 1, tag: 0)
         do {
             try ssdpSocket.bind(toPort: ssdpPort)
         } catch _ {
@@ -212,26 +212,26 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
     }
     
     func setRequest(url:NSURL){
-        let request = NSMutableURLRequest(URL: url as URL)
-        request.HTTPMethod = "POST"
-
-        URLSession.sharedSession().dataTaskWithRequest(request).resume()
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request as URLRequest).resume()
     }
-
+    
     func udpSocket(sock: GCDAsyncUdpSocket!, didConnectToAddress address: NSData!) {
-
+        
     }
     
     func udpSocket(sock: GCDAsyncUdpSocket!, didNotConnect error: NSError!) {
-
+        
     }
     
     func udpSocket(sock: GCDAsyncUdpSocket!, didSendDataWithTag tag: Int) {
-
+        
     }
     
     func udpSocket(sock: GCDAsyncUdpSocket!, didNotSendDataWithTag tag: Int, dueToError error: NSError!) {
-
+        
     }
     
     func getButten(action:String) -> NSURL{
@@ -260,20 +260,20 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
         var port1: UInt16 = 0
         GCDAsyncUdpSocket.getHost(&host, port: &port1, fromAddress: address as Data)
         
-        let gotdata: NSString = NSString(data: data! as Data, encoding: NSUTF8StringEncoding)!
+        let gotdata: NSString = NSString(data: data! as Data, encoding: String.Encoding.utf8.rawValue)!
         
         if(gotdata.contains("Roku")){
-            let lines = (gotdata as String).componentsSeparatedByString("\n")
+            let lines = (gotdata as String).components(separatedBy: "\n")
             for i in lines{
-                if i.rangeOfString("LOCATION") != nil{
-                    let str:String =  i.componentsSeparatedByString("LOCATION:")[1].lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\r", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                if i.range(of: "LOCATION") != nil{
+                    let str:String = i.components(separatedBy: "LOCATION:")[1].lowercased().trimmingCharacters(in: NSCharacterSet.whitespaces).replacingOccurrences(of: "\r", with: "", options: NSString.CompareOptions.literal, range: nil)
                     ViewController.rokuList.append(str)
                 }
             }
         }
         let rokuImage = NSImage(named: NSImage.Name(rawValue: "roku"))
         for tmpView in self.view.subviews{
-            if tmpView.isKindOfClass(NSImageView) {
+            if tmpView.isKind(of: NSImageView.self){
                 let rokuImageView = tmpView as! NSImageView
                 if rokuImageView.image == rokuImage{
                     tmpView.removeFromSuperview()
@@ -281,51 +281,51 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
             }
         }
         yPosition = positionDefault
-            for str in ViewController.rokuList{
-                let image:NSImageView = NSImageView(frame: NSRect(origin: CGPoint(x: xPosition, y: yPosition), size: CGSize(width: 20, height: 20)))
-                image.image = rokuImage
+        for str in ViewController.rokuList{
+            let image:NSImageView = NSImageView(frame: NSRect(origin: CGPoint(x: xPosition, y: yPosition), size: CGSize(width: 20, height: 20)))
+            image.image = rokuImage
             
-                image.toolTip = str
-                image.action = Selector("imageClicked")
-                image.isEnabled = true
-                image.acceptsTouchEvents = true
-                
-                let tapGestureRecognizer = NSGestureRecognizer(target:self, action:Selector(("imageTapped:")))
-                image.addGestureRecognizer(tapGestureRecognizer)
-                self.view.addSubview(image)
-                let keyVal:String = String(stringInterpolationSegment: image.frame.origin.x) + " " + String(stringInterpolationSegment: image.frame.origin.y)
-                ViewController.rokuListRoku.updateValue(str, forKey: keyVal)
-             yPosition = yPosition - 22
-            }
+            image.toolTip = str
+            image.action = Selector(("imageClicked"))
+            image.isEnabled = true
+            image.acceptsTouchEvents = true
+            
+            let tapGestureRecognizer = NSGestureRecognizer(target:self, action:Selector(("imageTapped:")))
+            image.addGestureRecognizer(tapGestureRecognizer)
+            self.view.addSubview(image)
+            let keyVal:String = String(stringInterpolationSegment: image.frame.origin.x) + " " + String(stringInterpolationSegment: image.frame.origin.y)
+            ViewController.rokuListRoku.updateValue(str, forKey: keyVal)
+            yPosition = yPosition - 22
+        }
         ssdpSocket.close()
-
+        
         stopRotatingView()
-
+        
     }
     
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         _ = NumberFormatter()
         for (k,v) in ViewController.rokuListRoku{
             var xy = k.characters.split{$0 == " "}.map { String($0) }.map{String($0)}
             let x = xy[0]
             let y = xy[1]
-
-            var diffX:Float = Float(theEvent.locationInWindow.x).distanceTo(Float((x as NSString).floatValue))
-            var diffY:Float = Float(theEvent.locationInWindow.y).distanceTo(Float((y as NSString).floatValue))
-            diffX = Float.abs(diffX)
-            diffY = Float.abs(diffY)
+            
+            var diffX:Float = Float(theEvent.locationInWindow.x).distance(to: Float((x as NSString).floatValue))
+            var diffY:Float = Float(theEvent.locationInWindow.y).distance(to: Float((y as NSString).floatValue))
+            diffX = abs(diffX)
+            diffY = abs(diffY)
             if diffX <= 20 && diffX >= 0 && diffY <= 20 && diffY >= 0 {
                 self.label.stringValue = v
             }else{
-
+                
             }
         }
     }
     
     func imageTapped(img: AnyObject){
-
+        
     }
-
+    
     func getRokuList() -> [String]{
         return ViewController.rokuList
     }
@@ -348,7 +348,7 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
             let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
             
             rotationAnimation.fromValue = 0.0
-            rotationAnimation.toValue = Float(M_PI * 2.0)
+            rotationAnimation.toValue = Float(Double.pi * 2.0)
             rotationAnimation.duration = 1
             rotationAnimation.repeatCount = Float.infinity
             let width = refreshButton.frame.width
@@ -357,11 +357,13 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
             let yPoint = refreshButton.layer?.position.y
             let xCenter = xPoint!-(width/2)
             let yCenter = yPoint!-(height/2)
-            _ = CGPointMake(xCenter, yCenter)
+            _ = CGPoint(x: xCenter, y: yCenter)
+            
+            //Use above later
             refreshButton.layer?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             refreshButton.layer!.add(rotationAnimation, forKey: "rotation")
         }
-
+        
     }
     
     func stopRotatingView() {
@@ -369,6 +371,28 @@ class ViewController: NSViewController, GCDAsyncUdpSocketDelegate, NSResponder  
         if refreshButton.layer!.animation(forKey: "rotation") != nil {
             refreshButton.layer!.removeAnimation(forKey: "rotation")     }
     }
-
+    
 }
 
+extension NSColor {
+    convenience init(hexString: String) {
+        var hex = hexString.hasPrefix("#") ? String(hexString.characters.dropFirst()) : hexString
+        
+        guard hex.characters.count == 3 || hex.characters.count == 6 else {
+            self.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
+            return
+        }
+        
+        if hex.characters.count == 3 {
+            for (index, char) in hex.characters.enumerated() {
+                hex.insert(char, at: hex.characters.index(hex.startIndex, offsetBy: index * 2))
+            }
+        }
+        
+        let number = Int(hex, radix: 16)!
+        let red = CGFloat((number >> 16) & 0xFF) / 255.0
+        let green = CGFloat((number >> 8) & 0xFF) / 255.0
+        let blue = CGFloat(number & 0xFF) / 255.0
+        self.init(red: red, green: green, blue: blue, alpha: 1)
+    }
+}
